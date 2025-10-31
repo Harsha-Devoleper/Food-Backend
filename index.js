@@ -9,7 +9,7 @@ const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
 
@@ -30,6 +30,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.use('/home', (req, res) => {
-    res.send('This is home page');
+app.use('/', (req, res) => {
+    res.send('Welcome BUDDY');
 });
