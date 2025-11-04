@@ -16,14 +16,19 @@ const upload = multer({ storage: storage });
 
 const addFirm = async (req, res) => {
     try {
-        const { firmName, area, category, region, offer } = req.body;
 
+        const { firmName, area, category, region, offer } = req.body;
+        console.log(firmName, area, category, region, offer);
         const image = req.file ? req.file.path : null;
+        console.log("a");
+
 
         const vendor = await Vendor.findById(req.vendorId);
+        console.log("b");
         if (!vendor) {
             return res.status(404).json({ error: "Vendor not found" });
         }
+        console.log("c");
         const firm = new Firm({
             firmName,
             area,
@@ -33,10 +38,14 @@ const addFirm = async (req, res) => {
             image,
             vendor: vendor._id
         });
-       
+        console.log("Before saving:", firm);
+        console.log("1");
         const savedFirm = await firm.save();
+        console.log("2");
         vendor.firm.push(savedFirm);
+        console.log("3");
         await vendor.save();
+        console.log("4");
 
         res.status(201).json({ message: 'Firm added successfully' });
     } catch (error) {
