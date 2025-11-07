@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     category: { type: [{ type: String, enum: ['veg', 'non-veg'] }], required: true },
     image: { type: String },
-    bestSeller: { type: String },
+    bestSeller: { type: Boolean },
     description: { type: String },
     firm: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Firm'}],
 }, { timestamps: true });
